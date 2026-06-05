@@ -5,33 +5,38 @@ class ImageContainerWidget extends StatelessWidget {
     super.key,
     required this.imagePath,
     required this.opacity,
+    required this.isTopIndex,
+    this.isPreviewIndex = false,
+    required this.dragOffset,
   });
 
   final String imagePath;
   final double opacity;
+  final bool isTopIndex;
+  final bool isPreviewIndex;
+  final double dragOffset;
+
+  double get effectiveOpacity =>
+      isTopIndex ? 1 - (dragOffset.abs() / 230).clamp(0, 1) : opacity;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 600,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24.0),
-        color: Colors.blueGrey,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.5),
-            blurRadius: 30,
-            offset: const Offset(0, 0),
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(24.0),
-        child: Image.asset(
-          imagePath,
-          fit: BoxFit.cover,
-          opacity: Animation<double>.fromValueListenable(
-            ValueNotifier(opacity),
+    return Transform.translate(
+      offset: Offset(0, isTopIndex ? dragOffset : 0),
+      child: Container(
+        height: 600,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(32.0),
+          color: isTopIndex || isPreviewIndex
+              ? Colors.transparent
+              : const Color(0xFFE0E0E0),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(32.0),
+          child: Image.asset(
+            imagePath,
+            fit: BoxFit.cover,
+            opacity: AlwaysStoppedAnimation(effectiveOpacity),
           ),
         ),
       ),

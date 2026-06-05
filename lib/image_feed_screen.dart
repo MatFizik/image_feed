@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:image_feed/constants/mock_assets.dart';
 import 'package:image_feed/widgets/image_container_widget.dart';
@@ -11,8 +13,9 @@ class ImageFeedScreen extends StatefulWidget {
 
 class _ImageFeedScreenState extends State<ImageFeedScreen> {
   int _topImageIndex = 0;
+  int _previousTopImageIndex = 0;
   double _dragOffset = 0;
-  final int _visibleImageCount = 3;
+  final int _visibleImageCount = 5;
 
   final List<String> _mockImages = [
     MockAssets.zeroImage,
@@ -27,21 +30,28 @@ class _ImageFeedScreenState extends State<ImageFeedScreen> {
   ];
 
   void _onSwipe(SwipeDirection direction) {
-    setState(() {
-      switch (direction) {
-        case SwipeDirection.up:
-          if (_topImageIndex < _mockImages.length - 1) {
-            _topImageIndex++;
-          }
-          break;
-        case SwipeDirection.down:
-          if (_topImageIndex > 0) {
-            _topImageIndex--;
-          }
-          break;
-      }
-      _dragOffset = 0;
-    });
+    Timer(
+      Duration(milliseconds: 300),
+      () => setState(() {
+        switch (direction) {
+          case SwipeDirection.up:
+            if (_topImageIndex < _mockImages.length - 1) {
+              _previousTopImageIndex = _topImageIndex;
+              _topImageIndex++;
+            }
+            break;
+          case SwipeDirection.down:
+            if (_topImageIndex > 0) {
+              if (_topImageIndex - 1 != 0) {
+                _previousTopImageIndex--;
+              }
+              _topImageIndex--;
+            }
+            break;
+        }
+        _dragOffset = 0;
+      }),
+    );
   }
 
   @override
@@ -50,16 +60,16 @@ class _ImageFeedScreenState extends State<ImageFeedScreen> {
       0,
       _mockImages.length,
     );
-
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: const Color(0xFFFFFFFF),
+      appBar: AppBar(backgroundColor: const Color(0xFFFFFFFF), elevation: 0),
       body: GestureDetector(
         onVerticalDragUpdate: (details) {
           setState(() => _dragOffset += details.delta.dy);
         },
         onVerticalDragEnd: (details) {
-          final v = details.primaryVelocity ?? 0;
-          if (_dragOffset < -80 || v < -200) {
+          final double v = details.primaryVelocity ?? 0;
+          if (_dragOffset < -280 || v < -400) {
             _onSwipe(SwipeDirection.up);
           } else if (_dragOffset > 80 || v > 200) {
             _onSwipe(SwipeDirection.down);
@@ -76,16 +86,28 @@ class _ImageFeedScreenState extends State<ImageFeedScreen> {
                   bottom: -1 * (endIndex - i) * 20.0,
                   left: 0,
                   right: 0,
+                  child: ImageContainerWidget(
+                    imagePath: _mockImages[i],
+                    isTopIndex: i == _topImageIndex,
+                    dragOffset: i == _topImageIndex
+                        ? _dragOffset.clamp(-400, 0)
+                        : 0,
+                    opacity: (endIndex - i) / (endIndex - _topImageIndex),
+                  ),
+                ),
+              if (_previousTopImageIndex != _topImageIndex)
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
                   child: Transform.translate(
-                    offset: Offset(0, i == _topImageIndex ? _dragOffset : 0),
-                    child: Opacity(
-                      opacity: i == _topImageIndex
-                          ? 1 - (_dragOffset.abs() / 230).clamp(0, 1)
-                          : (endIndex - i) / (endIndex - _topImageIndex),
-                      child: ImageContainerWidget(
-                        imagePath: _mockImages[i],
-                        opacity: (endIndex - i) / (endIndex - _topImageIndex),
-                      ),
+                    offset: Offset(0, _dragOffset.clamp(0, double.infinity)),
+                    child: ImageContainerWidget(
+                      imagePath: _mockImages[_previousTopImageIndex],
+                      isTopIndex: false,
+                      isPreviewIndex: true,
+                      dragOffset: 0,
+                      opacity: (_dragOffset.clamp(0, 200) / 100).clamp(0, 1),
                     ),
                   ),
                 ),
