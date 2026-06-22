@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:image_feed/image_feed_screen.dart';
+import 'package:image_feed/features/presentation/screens/image_feed_screen.dart';
 
 void main() {
   runApp(const ImageFeedApp());

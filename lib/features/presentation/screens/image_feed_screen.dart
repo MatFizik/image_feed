@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:image_feed/constants/mock_assets.dart';
-import 'package:image_feed/widgets/image_container_widget.dart';
+import 'package:image_feed/features/presentation/widgets/image_container_widget.dart';
 
 class ImageFeedScreen extends StatefulWidget {
   const ImageFeedScreen({super.key});
