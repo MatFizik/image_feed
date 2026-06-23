@@ -1,7 +1,9 @@
 import 'package:image_feed/constants/mock_assets.dart';
 import 'package:image_feed/features/domain/entities/photo.dart';
 import 'package:image_feed/features/domain/image_feed_repository.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton(as: ImageFeedRepository)
 class ImageFeedRepositoryImpl implements ImageFeedRepository {
   @override
   Future<List<Photo>> fetchPhotos({int page = 1, int limit = 20}) async {

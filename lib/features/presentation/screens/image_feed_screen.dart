@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:image_feed/features/data/image_feed_repository_impl.dart';
 import 'package:image_feed/features/domain/entities/photo.dart';
-import 'package:image_feed/features/domain/image_feed_use_case.dart';
 import 'package:image_feed/features/presentation/bloc/image_feed_bloc.dart';
 import 'package:image_feed/features/presentation/widgets/image_container_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,19 +19,12 @@ class _ImageFeedScreenState extends State<ImageFeedScreen> {
   double _dragOffset = 0;
   final int _visibleImageCount = 5;
   final List<Photo> _photos = [];
-  late final ImageFeedBloc _imageFeedBloc = ImageFeedBloc(
-    GetPhotosUseCase(ImageFeedRepositoryImpl()),
-  );
   final int _currentPage = 1;
 
-  @override
-  void initState() {
-    super.initState();
-    _fetchPhotos();
-  }
-
   void _fetchPhotos() async {
-    _imageFeedBloc.add(ImageFeedEvent.fetchPhotos(page: _currentPage));
+    context.read<ImageFeedBloc>().add(
+      ImageFeedEvent.fetchPhotos(page: _currentPage),
+    );
   }
 
   void _onSwipe(SwipeDirection direction) {
@@ -71,7 +62,7 @@ class _ImageFeedScreenState extends State<ImageFeedScreen> {
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: AppBar(backgroundColor: const Color(0xFFFFFFFF), elevation: 0),
       body: BlocProvider.value(
-        value: _imageFeedBloc,
+        value: context.read<ImageFeedBloc>(),
         child: BlocListener<ImageFeedBloc, ImageFeedState>(
           listener: (context, state) {
             switch (state) {
