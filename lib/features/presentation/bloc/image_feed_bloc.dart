@@ -22,29 +22,49 @@ class ImageFeedBloc extends Bloc<ImageFeedEvent, ImageFeedState> {
   ) async {
     await event.map(
       fetchPhotos: (e) async {
-        emit(ImageFeedState(isLoading: true));
+        emit(state.copyWith(isLoading: true, errorMessage: null));
         try {
           final photos = await _getPhotosUseCase(page: e.page);
-          emit(ImageFeedState(photos: photos));
+          emit(
+            state.copyWith(
+              photos: photos,
+              currentPage: e.page,
+              isLoading: false,
+              isLoadingMore: false,
+            ),
+          );
         } catch (error) {
-          emit(ImageFeedState(errorMessage: error.toString()));
+          emit(state.copyWith(isLoading: false, errorMessage: error.toString()));
         }
       },
       loadMorePhotos: (e) async {
-        emit(state.copyWith(isLoading: true));
+        if (state.isLoadingMore == true || state.isLoading == true) {
+          return;
+        }
+
+        final nextPage = (state.currentPage ?? 1) + 1;
+        emit(state.copyWith(isLoadingMore: true, errorMessage: null));
+
         try {
-          final int nextPage = ((state.totalPhotos ?? 1) / 20).ceil() + 1;
-          final List<Photo> photos = await _getPhotosUseCase(page: nextPage);
+          final photos = await _getPhotosUseCase(page: nextPage);
+          if (photos.isEmpty) {
+            emit(state.copyWith(isLoadingMore: false));
+            return;
+          }
+
           emit(
             state.copyWith(
               photos: [...?state.photos, ...photos],
               currentPage: nextPage,
-              isLoading: false,
+              isLoadingMore: false,
             ),
           );
         } catch (error) {
           emit(
-            state.copyWith(errorMessage: error.toString(), isLoading: false),
+            state.copyWith(
+              isLoadingMore: false,
+              errorMessage: error.toString(),
+            ),
           );
         }
       },

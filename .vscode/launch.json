@@ -1,0 +1,12 @@
+{
+  "configurations": [
+    {
+      "name": "image_feed",
+      "request": "launch",
+      "type": "dart",
+      "toolArgs": [
+        "--dart-define-from-file=secrets.json"
+      ]
+    }
+  ]
+}
