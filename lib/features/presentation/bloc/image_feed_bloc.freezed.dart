@@ -14,61 +14,30 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ImageFeedEvent {
 
- int get page;
-/// Create a copy of ImageFeedEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$ImageFeedEventCopyWith<ImageFeedEvent> get copyWith => _$ImageFeedEventCopyWithImpl<ImageFeedEvent>(this as ImageFeedEvent, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ImageFeedEvent&&(identical(other.page, page) || other.page == page));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ImageFeedEvent);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,page);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'ImageFeedEvent(page: $page)';
+  return 'ImageFeedEvent()';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $ImageFeedEventCopyWith<$Res>  {
-  factory $ImageFeedEventCopyWith(ImageFeedEvent value, $Res Function(ImageFeedEvent) _then) = _$ImageFeedEventCopyWithImpl;
-@useResult
-$Res call({
- int page
-});
-
-
-
-
-}
-/// @nodoc
-class _$ImageFeedEventCopyWithImpl<$Res>
-    implements $ImageFeedEventCopyWith<$Res> {
-  _$ImageFeedEventCopyWithImpl(this._self, this._then);
-
-  final ImageFeedEvent _self;
-  final $Res Function(ImageFeedEvent) _then;
-
-/// Create a copy of ImageFeedEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? page = null,}) {
-  return _then(_self.copyWith(
-page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
-as int,
-  ));
-}
-
+class $ImageFeedEventCopyWith<$Res>  {
+$ImageFeedEventCopyWith(ImageFeedEvent _, $Res Function(ImageFeedEvent) __);
 }
 
 
@@ -86,11 +55,12 @@ extension ImageFeedEventPatterns on ImageFeedEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _FetchPhotos value)?  fetchPhotos,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _FetchPhotos value)?  fetchPhotos,TResult Function( _LoadMorePhotos value)?  loadMorePhotos,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _FetchPhotos() when fetchPhotos != null:
-return fetchPhotos(_that);case _:
+return fetchPhotos(_that);case _LoadMorePhotos() when loadMorePhotos != null:
+return loadMorePhotos(_that);case _:
   return orElse();
 
 }
@@ -108,11 +78,12 @@ return fetchPhotos(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _FetchPhotos value)  fetchPhotos,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _FetchPhotos value)  fetchPhotos,required TResult Function( _LoadMorePhotos value)  loadMorePhotos,}){
 final _that = this;
 switch (_that) {
 case _FetchPhotos():
-return fetchPhotos(_that);}
+return fetchPhotos(_that);case _LoadMorePhotos():
+return loadMorePhotos(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -126,11 +97,12 @@ return fetchPhotos(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _FetchPhotos value)?  fetchPhotos,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _FetchPhotos value)?  fetchPhotos,TResult? Function( _LoadMorePhotos value)?  loadMorePhotos,}){
 final _that = this;
 switch (_that) {
 case _FetchPhotos() when fetchPhotos != null:
-return fetchPhotos(_that);case _:
+return fetchPhotos(_that);case _LoadMorePhotos() when loadMorePhotos != null:
+return loadMorePhotos(_that);case _:
   return null;
 
 }
@@ -147,10 +119,11 @@ return fetchPhotos(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int page)?  fetchPhotos,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int page)?  fetchPhotos,TResult Function()?  loadMorePhotos,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FetchPhotos() when fetchPhotos != null:
-return fetchPhotos(_that.page);case _:
+return fetchPhotos(_that.page);case _LoadMorePhotos() when loadMorePhotos != null:
+return loadMorePhotos();case _:
   return orElse();
 
 }
@@ -168,10 +141,11 @@ return fetchPhotos(_that.page);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int page)  fetchPhotos,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int page)  fetchPhotos,required TResult Function()  loadMorePhotos,}) {final _that = this;
 switch (_that) {
 case _FetchPhotos():
-return fetchPhotos(_that.page);}
+return fetchPhotos(_that.page);case _LoadMorePhotos():
+return loadMorePhotos();}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -185,10 +159,11 @@ return fetchPhotos(_that.page);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int page)?  fetchPhotos,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int page)?  fetchPhotos,TResult? Function()?  loadMorePhotos,}) {final _that = this;
 switch (_that) {
 case _FetchPhotos() when fetchPhotos != null:
-return fetchPhotos(_that.page);case _:
+return fetchPhotos(_that.page);case _LoadMorePhotos() when loadMorePhotos != null:
+return loadMorePhotos();case _:
   return null;
 
 }
@@ -203,11 +178,11 @@ class _FetchPhotos implements ImageFeedEvent {
   const _FetchPhotos({required this.page});
   
 
-@override final  int page;
+ final  int page;
 
 /// Create a copy of ImageFeedEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 _$FetchPhotosCopyWith<_FetchPhotos> get copyWith => __$FetchPhotosCopyWithImpl<_FetchPhotos>(this, _$identity);
 
@@ -233,7 +208,7 @@ String toString() {
 /// @nodoc
 abstract mixin class _$FetchPhotosCopyWith<$Res> implements $ImageFeedEventCopyWith<$Res> {
   factory _$FetchPhotosCopyWith(_FetchPhotos value, $Res Function(_FetchPhotos) _then) = __$FetchPhotosCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  int page
 });
@@ -252,7 +227,7 @@ class __$FetchPhotosCopyWithImpl<$Res>
 
 /// Create a copy of ImageFeedEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? page = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? page = null,}) {
   return _then(_FetchPhotos(
 page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int,
@@ -263,7 +238,12 @@ as int,
 }
 
 /// @nodoc
-mixin _$ImageFeedState {
+
+
+class _LoadMorePhotos implements ImageFeedEvent {
+  const _LoadMorePhotos();
+  
+
 
 
 
@@ -271,7 +251,7 @@ mixin _$ImageFeedState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ImageFeedState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadMorePhotos);
 }
 
 
@@ -280,15 +260,78 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'ImageFeedState()';
+  return 'ImageFeedEvent.loadMorePhotos()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+mixin _$ImageFeedState {
+
+ List<Photo>? get photos; int? get currentPage; int? get totalPhotos; bool? get isLoading; bool? get isLoadingMore; String? get errorMessage;
+/// Create a copy of ImageFeedState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ImageFeedStateCopyWith<ImageFeedState> get copyWith => _$ImageFeedStateCopyWithImpl<ImageFeedState>(this as ImageFeedState, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ImageFeedState&&const DeepCollectionEquality().equals(other.photos, photos)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.totalPhotos, totalPhotos) || other.totalPhotos == totalPhotos)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(photos),currentPage,totalPhotos,isLoading,isLoadingMore,errorMessage);
+
+@override
+String toString() {
+  return 'ImageFeedState(photos: $photos, currentPage: $currentPage, totalPhotos: $totalPhotos, isLoading: $isLoading, isLoadingMore: $isLoadingMore, errorMessage: $errorMessage)';
 }
 
 
 }
 
 /// @nodoc
-class $ImageFeedStateCopyWith<$Res>  {
-$ImageFeedStateCopyWith(ImageFeedState _, $Res Function(ImageFeedState) __);
+abstract mixin class $ImageFeedStateCopyWith<$Res>  {
+  factory $ImageFeedStateCopyWith(ImageFeedState value, $Res Function(ImageFeedState) _then) = _$ImageFeedStateCopyWithImpl;
+@useResult
+$Res call({
+ List<Photo>? photos, int? currentPage, int? totalPhotos, bool? isLoading, bool? isLoadingMore, String? errorMessage
+});
+
+
+
+
+}
+/// @nodoc
+class _$ImageFeedStateCopyWithImpl<$Res>
+    implements $ImageFeedStateCopyWith<$Res> {
+  _$ImageFeedStateCopyWithImpl(this._self, this._then);
+
+  final ImageFeedState _self;
+  final $Res Function(ImageFeedState) _then;
+
+/// Create a copy of ImageFeedState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? photos = freezed,Object? currentPage = freezed,Object? totalPhotos = freezed,Object? isLoading = freezed,Object? isLoadingMore = freezed,Object? errorMessage = freezed,}) {
+  return _then(_self.copyWith(
+photos: freezed == photos ? _self.photos : photos // ignore: cast_nullable_to_non_nullable
+as List<Photo>?,currentPage: freezed == currentPage ? _self.currentPage : currentPage // ignore: cast_nullable_to_non_nullable
+as int?,totalPhotos: freezed == totalPhotos ? _self.totalPhotos : totalPhotos // ignore: cast_nullable_to_non_nullable
+as int?,isLoading: freezed == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool?,isLoadingMore: freezed == isLoadingMore ? _self.isLoadingMore : isLoadingMore // ignore: cast_nullable_to_non_nullable
+as bool?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
 }
 
 
@@ -306,14 +349,11 @@ extension ImageFeedStatePatterns on ImageFeedState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Initial value)?  initial,TResult Function( LoadingPhotos value)?  loadingPhotos,TResult Function( LoadedPhotos value)?  loadedPhotos,TResult Function( ErrorPhotos value)?  errorPhotos,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ImageFeedState value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case Initial() when initial != null:
-return initial(_that);case LoadingPhotos() when loadingPhotos != null:
-return loadingPhotos(_that);case LoadedPhotos() when loadedPhotos != null:
-return loadedPhotos(_that);case ErrorPhotos() when errorPhotos != null:
-return errorPhotos(_that);case _:
+case _ImageFeedState() when $default != null:
+return $default(_that);case _:
   return orElse();
 
 }
@@ -331,14 +371,11 @@ return errorPhotos(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Initial value)  initial,required TResult Function( LoadingPhotos value)  loadingPhotos,required TResult Function( LoadedPhotos value)  loadedPhotos,required TResult Function( ErrorPhotos value)  errorPhotos,}){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ImageFeedState value)  $default,){
 final _that = this;
 switch (_that) {
-case Initial():
-return initial(_that);case LoadingPhotos():
-return loadingPhotos(_that);case LoadedPhotos():
-return loadedPhotos(_that);case ErrorPhotos():
-return errorPhotos(_that);}
+case _ImageFeedState():
+return $default(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -352,14 +389,11 @@ return errorPhotos(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Initial value)?  initial,TResult? Function( LoadingPhotos value)?  loadingPhotos,TResult? Function( LoadedPhotos value)?  loadedPhotos,TResult? Function( ErrorPhotos value)?  errorPhotos,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ImageFeedState value)?  $default,){
 final _that = this;
 switch (_that) {
-case Initial() when initial != null:
-return initial(_that);case LoadingPhotos() when loadingPhotos != null:
-return loadingPhotos(_that);case LoadedPhotos() when loadedPhotos != null:
-return loadedPhotos(_that);case ErrorPhotos() when errorPhotos != null:
-return errorPhotos(_that);case _:
+case _ImageFeedState() when $default != null:
+return $default(_that);case _:
   return null;
 
 }
@@ -376,13 +410,10 @@ return errorPhotos(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loadingPhotos,TResult Function( List<Photo> photos)?  loadedPhotos,TResult Function( String message)?  errorPhotos,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Photo>? photos,  int? currentPage,  int? totalPhotos,  bool? isLoading,  bool? isLoadingMore,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case Initial() when initial != null:
-return initial();case LoadingPhotos() when loadingPhotos != null:
-return loadingPhotos();case LoadedPhotos() when loadedPhotos != null:
-return loadedPhotos(_that.photos);case ErrorPhotos() when errorPhotos != null:
-return errorPhotos(_that.message);case _:
+case _ImageFeedState() when $default != null:
+return $default(_that.photos,_that.currentPage,_that.totalPhotos,_that.isLoading,_that.isLoadingMore,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -400,13 +431,10 @@ return errorPhotos(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loadingPhotos,required TResult Function( List<Photo> photos)  loadedPhotos,required TResult Function( String message)  errorPhotos,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Photo>? photos,  int? currentPage,  int? totalPhotos,  bool? isLoading,  bool? isLoadingMore,  String? errorMessage)  $default,) {final _that = this;
 switch (_that) {
-case Initial():
-return initial();case LoadingPhotos():
-return loadingPhotos();case LoadedPhotos():
-return loadedPhotos(_that.photos);case ErrorPhotos():
-return errorPhotos(_that.message);}
+case _ImageFeedState():
+return $default(_that.photos,_that.currentPage,_that.totalPhotos,_that.isLoading,_that.isLoadingMore,_that.errorMessage);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -420,13 +448,10 @@ return errorPhotos(_that.message);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loadingPhotos,TResult? Function( List<Photo> photos)?  loadedPhotos,TResult? Function( String message)?  errorPhotos,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Photo>? photos,  int? currentPage,  int? totalPhotos,  bool? isLoading,  bool? isLoadingMore,  String? errorMessage)?  $default,) {final _that = this;
 switch (_that) {
-case Initial() when initial != null:
-return initial();case LoadingPhotos() when loadingPhotos != null:
-return loadingPhotos();case LoadedPhotos() when loadedPhotos != null:
-return loadedPhotos(_that.photos);case ErrorPhotos() when errorPhotos != null:
-return errorPhotos(_that.message);case _:
+case _ImageFeedState() when $default != null:
+return $default(_that.photos,_that.currentPage,_that.totalPhotos,_that.isLoading,_that.isLoadingMore,_that.errorMessage);case _:
   return null;
 
 }
@@ -437,113 +462,56 @@ return errorPhotos(_that.message);case _:
 /// @nodoc
 
 
-class Initial implements ImageFeedState {
-  const Initial();
+class _ImageFeedState implements ImageFeedState {
+  const _ImageFeedState({final  List<Photo>? photos, this.currentPage, this.totalPhotos, this.isLoading, this.isLoadingMore, this.errorMessage}): _photos = photos;
   
 
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Initial);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'ImageFeedState.initial()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
-class LoadingPhotos implements ImageFeedState {
-  const LoadingPhotos();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadingPhotos);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'ImageFeedState.loadingPhotos()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
-class LoadedPhotos implements ImageFeedState {
-  const LoadedPhotos({required final  List<Photo> photos}): _photos = photos;
-  
-
- final  List<Photo> _photos;
- List<Photo> get photos {
+ final  List<Photo>? _photos;
+@override List<Photo>? get photos {
+  final value = _photos;
+  if (value == null) return null;
   if (_photos is EqualUnmodifiableListView) return _photos;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_photos);
+  return EqualUnmodifiableListView(value);
 }
 
+@override final  int? currentPage;
+@override final  int? totalPhotos;
+@override final  bool? isLoading;
+@override final  bool? isLoadingMore;
+@override final  String? errorMessage;
 
 /// Create a copy of ImageFeedState
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$LoadedPhotosCopyWith<LoadedPhotos> get copyWith => _$LoadedPhotosCopyWithImpl<LoadedPhotos>(this, _$identity);
+_$ImageFeedStateCopyWith<_ImageFeedState> get copyWith => __$ImageFeedStateCopyWithImpl<_ImageFeedState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadedPhotos&&const DeepCollectionEquality().equals(other._photos, _photos));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ImageFeedState&&const DeepCollectionEquality().equals(other._photos, _photos)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.totalPhotos, totalPhotos) || other.totalPhotos == totalPhotos)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_photos));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_photos),currentPage,totalPhotos,isLoading,isLoadingMore,errorMessage);
 
 @override
 String toString() {
-  return 'ImageFeedState.loadedPhotos(photos: $photos)';
+  return 'ImageFeedState(photos: $photos, currentPage: $currentPage, totalPhotos: $totalPhotos, isLoading: $isLoading, isLoadingMore: $isLoadingMore, errorMessage: $errorMessage)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $LoadedPhotosCopyWith<$Res> implements $ImageFeedStateCopyWith<$Res> {
-  factory $LoadedPhotosCopyWith(LoadedPhotos value, $Res Function(LoadedPhotos) _then) = _$LoadedPhotosCopyWithImpl;
-@useResult
+abstract mixin class _$ImageFeedStateCopyWith<$Res> implements $ImageFeedStateCopyWith<$Res> {
+  factory _$ImageFeedStateCopyWith(_ImageFeedState value, $Res Function(_ImageFeedState) _then) = __$ImageFeedStateCopyWithImpl;
+@override @useResult
 $Res call({
- List<Photo> photos
+ List<Photo>? photos, int? currentPage, int? totalPhotos, bool? isLoading, bool? isLoadingMore, String? errorMessage
 });
 
 
@@ -551,85 +519,24 @@ $Res call({
 
 }
 /// @nodoc
-class _$LoadedPhotosCopyWithImpl<$Res>
-    implements $LoadedPhotosCopyWith<$Res> {
-  _$LoadedPhotosCopyWithImpl(this._self, this._then);
+class __$ImageFeedStateCopyWithImpl<$Res>
+    implements _$ImageFeedStateCopyWith<$Res> {
+  __$ImageFeedStateCopyWithImpl(this._self, this._then);
 
-  final LoadedPhotos _self;
-  final $Res Function(LoadedPhotos) _then;
-
-/// Create a copy of ImageFeedState
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? photos = null,}) {
-  return _then(LoadedPhotos(
-photos: null == photos ? _self._photos : photos // ignore: cast_nullable_to_non_nullable
-as List<Photo>,
-  ));
-}
-
-
-}
-
-/// @nodoc
-
-
-class ErrorPhotos implements ImageFeedState {
-  const ErrorPhotos({required this.message});
-  
-
- final  String message;
+  final _ImageFeedState _self;
+  final $Res Function(_ImageFeedState) _then;
 
 /// Create a copy of ImageFeedState
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$ErrorPhotosCopyWith<ErrorPhotos> get copyWith => _$ErrorPhotosCopyWithImpl<ErrorPhotos>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ErrorPhotos&&(identical(other.message, message) || other.message == message));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,message);
-
-@override
-String toString() {
-  return 'ImageFeedState.errorPhotos(message: $message)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $ErrorPhotosCopyWith<$Res> implements $ImageFeedStateCopyWith<$Res> {
-  factory $ErrorPhotosCopyWith(ErrorPhotos value, $Res Function(ErrorPhotos) _then) = _$ErrorPhotosCopyWithImpl;
-@useResult
-$Res call({
- String message
-});
-
-
-
-
-}
-/// @nodoc
-class _$ErrorPhotosCopyWithImpl<$Res>
-    implements $ErrorPhotosCopyWith<$Res> {
-  _$ErrorPhotosCopyWithImpl(this._self, this._then);
-
-  final ErrorPhotos _self;
-  final $Res Function(ErrorPhotos) _then;
-
-/// Create a copy of ImageFeedState
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
-  return _then(ErrorPhotos(
-message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+@override @pragma('vm:prefer-inline') $Res call({Object? photos = freezed,Object? currentPage = freezed,Object? totalPhotos = freezed,Object? isLoading = freezed,Object? isLoadingMore = freezed,Object? errorMessage = freezed,}) {
+  return _then(_ImageFeedState(
+photos: freezed == photos ? _self._photos : photos // ignore: cast_nullable_to_non_nullable
+as List<Photo>?,currentPage: freezed == currentPage ? _self.currentPage : currentPage // ignore: cast_nullable_to_non_nullable
+as int?,totalPhotos: freezed == totalPhotos ? _self.totalPhotos : totalPhotos // ignore: cast_nullable_to_non_nullable
+as int?,isLoading: freezed == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool?,isLoadingMore: freezed == isLoadingMore ? _self.isLoadingMore : isLoadingMore // ignore: cast_nullable_to_non_nullable
+as bool?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
