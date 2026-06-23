@@ -17,7 +17,7 @@ class ImageFeedApp extends StatelessWidget {
       create: (context) =>
           getIt<ImageFeedBloc>()..add(ImageFeedEvent.fetchPhotos(page: 1)),
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Image Feed',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
